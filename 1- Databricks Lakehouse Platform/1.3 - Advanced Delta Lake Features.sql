@@ -5,10 +5,6 @@
 
 -- COMMAND ----------
 
-USE CATALOG hive_metastore
-
--- COMMAND ----------
-
 DESCRIBE HISTORY employees
 
 -- COMMAND ----------
@@ -19,6 +15,38 @@ FROM employees VERSION AS OF 4
 -- COMMAND ----------
 
 SELECT * FROM employees@v4
+
+-- COMMAND ----------
+
+-- RESTORE command (to restore the previours versions of the table)
+
+RESTORE table employees to VERSION AS OF 5
+
+-- COMMAND ----------
+
+select * from employees
+
+-- COMMAND ----------
+
+describe history employees
+
+-- COMMAND ----------
+
+-- OPTIMIZE command
+OPTIMIZE employees
+ZORDER by id
+
+-- COMMAND ----------
+
+-- DBTITLE 1,VACUUM employees with correct retention
+-- VACUUM command
+-- VACUUM table_name (retention period) (Default retention period: 7 days)
+
+-- Once the VACUUM command exicuted, no Time Travel applicable before retention period
+
+
+vacuum employees retain 168 hours
+
 
 -- COMMAND ----------
 

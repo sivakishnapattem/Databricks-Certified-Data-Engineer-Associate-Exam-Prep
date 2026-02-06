@@ -12,7 +12,7 @@
 
 -- COMMAND ----------
 
--- MAGIC %run ../Includes/Copy-Datasets
+-- MAGIC %run ../Includes/Datasets
 
 -- COMMAND ----------
 
