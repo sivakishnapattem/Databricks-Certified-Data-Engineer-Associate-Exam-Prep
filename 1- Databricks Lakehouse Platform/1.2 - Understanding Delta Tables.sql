@@ -9,12 +9,30 @@
 
 -- COMMAND ----------
 
-USE CATALOG hive_metastore
+USE CATALOG workspace
 
 -- COMMAND ----------
 
 CREATE TABLE employees
   (id INT, name STRING, salary DOUBLE);
+
+-- COMMAND ----------
+
+drop table employees
+
+-- COMMAND ----------
+
+-- DBTITLE 1,CREATE employees table with comments and PK
+CREATE TABLE employees (
+  id INT COMMENT 'Employee ID',
+  name STRING COMMENT 'Employee Name',
+  salary DOUBLE COMMENT 'Employee Salary',
+  PRIMARY KEY (id)
+);
+
+-- COMMAND ----------
+
+desc extended employees
 
 -- COMMAND ----------
 
@@ -69,10 +87,6 @@ DESCRIBE DETAIL employees
 
 -- COMMAND ----------
 
--- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees'
-
--- COMMAND ----------
-
 -- MAGIC %md
 -- MAGIC ## Updating Table
 
@@ -85,10 +99,6 @@ WHERE name LIKE "A%"
 -- COMMAND ----------
 
 SELECT * FROM employees
-
--- COMMAND ----------
-
--- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees'
 
 -- COMMAND ----------
 
@@ -106,14 +116,6 @@ SELECT * FROM employees
 -- COMMAND ----------
 
 DESCRIBE HISTORY employees
-
--- COMMAND ----------
-
--- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees/_delta_log'
-
--- COMMAND ----------
-
--- MAGIC %fs head 'dbfs:/user/hive/warehouse/employees/_delta_log/00000000000000000005.json'
 
 -- COMMAND ----------
 
